@@ -1,6 +1,6 @@
 import unittest
 from ipynb.fs.full.index import (attendance, attendance_with_friends, marginal_return_on_budget, y_intercept, shows,
- m_b_data, m_b_trace, y_intercept_provided, build_regression_line, expected_value_for_line)
+ m_b_data, m_b_trace, build_starting_line, expected_value_for_line)
 
 class TestRegression(unittest.TestCase):
     def test_attendance(self):
@@ -27,20 +27,14 @@ class TestRegression(unittest.TestCase):
         self.assertEqual(marginal_return_on_budget(first_show, second_show), 1.5)
         self.assertEqual(marginal_return_on_budget(imaginary_third_show, imaginary_fourth_show), 1.3333333333333333)
 
-    def test_y_intercept_provided(self):
-        budgets = [0, 200, 400]
-        attendance = [100, 400, 700]
-        self.assertEqual(y_intercept_provided(budgets, attendance), 100)
-        self.assertEqual(y_intercept_provided([200, 400], [400, 700]), False)
-
     def test_y_intercept(self):
         budgets = [0, 200, 400]
         attendance = [100, 400, 700]
         self.assertEqual(y_intercept(budgets, attendance), 100)
         self.assertEqual(y_intercept([200, 400], [400, 700]), 100)
 
-    def test_build_regression_line(self):
-        self.assertEqual(build_regression_line([0, 200, 400], [10, 400, 700]), {'b': 10.0, 'm': 1.725})
+    def test_build_starting_line(self):
+        self.assertEqual(build_starting_line([0, 200, 400], [10, 400, 700]), {'b': 10.0, 'm': 1.725})
 
     def test_expected_value_for_line(self):
         self.assertEqual(expected_value_for_line(1.5, 100, 100), 250)

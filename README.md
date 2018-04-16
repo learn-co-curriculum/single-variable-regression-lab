@@ -27,7 +27,7 @@ attendance(100) # 150
 attendance(50) # 75
 ```
 
-Despite what the student newspaper says, the comedy show knows from experience that they'll still have a crowd even without an advertising budget.  Some of the comedians in the show have friends (believe it or not), and twenty of those friends will show up.  Write a function called `attendance_with_friends` that models the following: 
+As the old adage goes, "Don't ask the barber if you need a haircut!" Likewise, despite what the student newspaper says, the comedy show knows from experience that they'll still have a crowd even without an advertising budget.  Some of the comedians in the show have friends (believe it or not), and twenty of those friends will show up.  Write a function called `attendance_with_friends` that models the following: 
 
  *  When the advertising budget is zero, 20 friends still attend
  * Three additional people attend the show for every two dollars spent on advertising
@@ -52,7 +52,7 @@ attendance_with_friends(50) # 95
 
 Let's help plot this line so you can get a sense of what your $m$ and $b$ values look like in graph form.
 
-Our x-values can be a list of `initial_sample_budgets`,  equal to a list of our budgets.  And we can use the outputs of our `attendance_with_friends` function to determine the list of `attendance-values`, the attendance at each of those x-values.
+Our x values can be a list of `initial_sample_budgets`,  equal to a list of our budgets.  And we can use the outputs of our `attendance_with_friends` function to determine the list of `attendance_values`, the attendance at each of those x values.
 
 
 ```python
@@ -79,24 +79,9 @@ plotly.offline.iplot([trace_of_attendance_with_friends])
 ```
 
 
-<script>requirejs.config({paths: { 'plotly': ['https://cdn.plot.ly/plotly-latest.min']},});if(!window.Plotly) {{require(['plotly'],function(plotly) {window.Plotly=plotly;});}}</script>
-
-
-
-<div id="eb62a2e6-6b63-4309-bf18-8ab32f241f65" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("eb62a2e6-6b63-4309-bf18-8ab32f241f65", [{"type": "scatter", "x": [0, 50, 100], "y": [20, 95, 170]}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script>
-
-
-
 ```python
 trace_of_attendance_with_friends
 ```
-
-
-
-
-    {'type': 'scatter', 'x': [0, 50, 100], 'y': [20, 95, 170]}
-
-
 
 Now let's write a couple functions that we can use going forward.  We'll write a function called `m_b_data` that given a slope of a line, $m$, a y-intercept, $b$, will return a dictionary that has a key of `x` pointing to a list of `x_values`, and a key of `y` that points to a list of `y_values`.  Each $y$ value should be the output of a regression line for the provided $m$ and $b$ values, for each of the provided `x_values`.
 
@@ -127,7 +112,7 @@ m_b_trace(1.5, 20, [0, 50, 100])
 
 ### Calculating lines
 
-The comedy show decides to use advertising with three different shows.  The comedy show sets forth it's own predictions, and expexts that the attendance will look like the following for the respective budgets:
+The comedy show decides to advertise for two different shows.  The attendance looks like the following.
 
 | Budgets (dollars)        | Attendance           | 
 | ------------- |:-------------:| 
@@ -157,7 +142,12 @@ def marginal_return_on_budget(first_show, second_show):
 marginal_return_on_budget(first_show, second_show) # 1.5
 ```
 
-Let's make sure that our function properly calculates the slope of the line with different data.
+
+```python
+first_show
+```
+
+Just to check, let's use some different data to make sure our `marginal_return_on_budget` function calculates the slope properly.
 
 
 ```python
@@ -166,9 +156,9 @@ imaginary_fourth_show = {'budget': 600, 'attendance': 900}
 marginal_return_on_budget(imaginary_third_show, imaginary_fourth_show) # 1.3333333333333333
 ```
 
-Now we'll begin to write functions that we can use going forward.  The functions will calculate attributes of lines in general, as well be applied to predicting the attendance of the comedy show.
+Great!  Now we'll begin to write functions that we can use going forward.  The functions will calculate attributes of lines in general and can be used to predict the attendance of the comedy show.
 
-Take the following data.  The comedy show spends zero dollars on advertising for the next show.  Now the attendance chart looks like the following:
+Take the following data.  The comedy show spends zero dollars on advertising for the next show.  The attendance chart now looks like the following:
 
 | Budgets (dollars)        | Attendance           | 
 | ------------- |:-------------:| 
@@ -182,9 +172,7 @@ budgets = [0, 200, 400]
 attendance_numbers = [100, 400, 700]
 ```
 
-Write a function called `y_intercept_provided`.  Given a list of `x_values` and a list of `y_values` should find the point with an x_value of zero, and then return the corresponding y-value.  If there is no x-value equal to zero, it returns `False`.
-
-To get you started, we'll provide a function called `sort_points` that returns a list of points sorted by their x_values.  The return value is a list of sorted tuples.
+To get you started, we'll provide a function called `sorted_points` that accepts a list of x values and a list of y values and returns a list of point coordinates sorted by their x values.  The return value is a list of sorted tuples.
 
 
 ```python
@@ -199,37 +187,13 @@ def sorted_points(x_values, y_values):
 sorted_points([4, 1, 6], [4, 6, 7])
 ```
 
+#### build_starting_line 
 
+In this section, we'll write a function called `build_starting_line`. The function that we end up building simply draws a line between our points with the highest and lowest x values.  We are selecting these points as an arbitrary "starting" point for our regression line.
 
+>  As John von Neumann said, "truth … is much too complicated to allow anything but approximations."  All models are inherently wrong, but some are useful.  In future lessons, we will learn how to build a regression line that accurately matches our dataset. For now, we will focus on building a useful "starting" line using the first and last points along the x-axis.
 
-    [(1, 6), (4, 4), (6, 7)]
-
-
-
-
-```python
-def y_intercept_provided(x_values, y_values):
-    pass
-```
-
-
-```python
-y_intercept_provided([200, 400], [400, 700]) # False
-```
-
-
-```python
-budgets = [0, 200, 400]
-attendance_numbers = [100, 400, 700]
-
-y_intercept_provided(budgets, attendance_numbers) # 100
-```
-
-#### build_regression_line
-
-In this section, we'll write a function called `build_regression_line`.  The function that we end up building will draw a line simply draws a line between our points with the highest and lowest x-values.  We'll see how to draw more accurate regression lines in future lessons.
-
-**First,** write a function called `slope`, that given a list of points, will use the points with the lowest and highest x-values to calculate the slope of a line.  
+**First**, write a function called `slope` that, given a list of x values and a list of y values, will use the points with the lowest and highest x values to calculate the slope of a line.
 
 
 ```python
@@ -242,11 +206,7 @@ def slope(x_values, y_values):
 slope([200, 400], [400, 700]) # 1.5
 ```
 
-Now write a function called `y_intercept`.  It calculates the y intercept by the following: 
-
-* If the values provided includes the y_intercept, it returns the provided y_intercept.
-* If the values provided do not include the y intercept, it calculates the y intercept by drawing a line from the highest x value provided down to where x = 0.  That drawn line has the slope calculated in the previous function.
-> Look to the calculating lines for help in writing this function.
+Now write a function called `y_intercept`.  Use the `slope` function to calculate the slope if it isn't provided as an argument. Then we will use the slope and the values of the point with the highest x value to return the y-intercept.
 
 
 ```python
@@ -264,20 +224,20 @@ y_intercept([200, 400], [400, 700]) # 100
 y_intercept([0, 200, 400], [10, 400, 700]) # 10
 ```
 
-Now write a function called `build_regression_line` that given a list of `x_values` and a list of `y_values` returns a dictionary with a key of `m` and a key of `b` to return the `m` and `b` values of the calculated regression line.  Use the  `slope` and `y_intercept` functions to calculate the line.
+Now write a function called `build_starting_line` that given a list of `x_values` and a list of `y_values` returns a dictionary with a key of `m` and a key of `b` to return the `m` and `b` values of the calculated regression line.  Use the  `slope` and `y_intercept` functions to calculate the line.
 
 
 ```python
-def build_regression_line(x_values, y_values):
+def build_starting_line(x_values, y_values):
     pass
 ```
 
 
 ```python
-build_regression_line([0, 200, 400], [10, 400, 700]) # {'b': 10.0, 'm': 1.725}
+build_starting_line([0, 200, 400], [10, 400, 700]) # {'b': 10.0, 'm': 1.725}
 ```
 
-**Finally,** let's write a function called `expected_value_for_line` that returns the expected attendance given the $m$, $b$, and $x value$.
+**Finally**, let's write a function called `expected_value_for_line` that returns the expected attendance given the $m$, $b$, and $x$ $value$.
 
 
 ```python
@@ -295,12 +255,12 @@ def expected_value_for_line(m, b, x_value):
 
 
 ```python
-expected_value_for_line(1.5, 100, 100) # 250.0
+expected_value_for_line(1.5, 100, 100) # 250
 ```
 
 ### Using our functions
 
-Now that we have built these functions, we can use them for our dataset.  Uncomment and run the lines below to see how we can use our functions going forward.
+Now that we have built these functions, we can use them on our dataset.  Uncomment and run the lines below to see how we can use our functions going forward.
 
 
 ```python
@@ -334,31 +294,14 @@ def plot(traces):
 ```
 
 
-
-
-    {'mode': 'markers',
-     'name': 'comedy show data',
-     'x': [200, 400, 300, 600],
-     'y': [400, 700, 500, 900]}
-
-
-
-
 ```python
-# show_regression_line = build_regression_line(show_x_values, show_y_values)
-# show_regression_line
+# show_starting_line = build_starting_line(show_x_values, show_y_values)
+# show_starting_line
 ```
 
 
-
-
-    {'b': 150.0, 'm': 1.25}
-
-
-
-
 ```python
-# trace_show_line = m_b_trace(show_regression_line['m'], show_regression_line['b'], show_x_values, name = 'regression line')
+# trace_show_line = m_b_trace(show_starting_line['m'], show_starting_line['b'], show_x_values, name = 'starting line')
 ```
 
 
@@ -367,20 +310,8 @@ def plot(traces):
 ```
 
 
-
-
-    {'mode': 'line',
-     'name': 'regression line',
-     'x': [200, 400, 300, 600],
-     'y': [400.0, 650.0, 525.0, 900.0]}
-
-
-
-
 ```python
 # plot([comedy_show_trace, trace_show_line])
 ```
 
-
-<div id="09f9ce73-0cd6-4c84-9fe1-a22f88f74f45" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("09f9ce73-0cd6-4c84-9fe1-a22f88f74f45", [{"x": [200, 400, 300, 600], "y": [400, 700, 500, 900], "mode": "markers", "name": "comedy show data"}, {"x": [200, 400, 300, 600], "y": [400.0, 650.0, 525.0, 900.0], "mode": "line", "name": "regression line"}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script>
-
+As we can see above, we built a "starting" regression line out of the points with the lowest and highest x values. We will learn in future lessons how to improve our line so that it becomes the "best fit" given all of our dataset, not just the first and last points. For now, this approach sufficed since our goal was to practice working with and plotting line functions.
