@@ -96,18 +96,18 @@ def m_b_data(m, b, x_values):
 m_b_data(1.5, 20, [0, 50, 100]) # {'x': [0, 50, 100], 'y': [20.0, 95.0, 170.0]}
 ```
 
-Now let's write a function called `m_b_trace` that uses our `m_b_data` function to return a dictionary that includes keys of `name` and `mode` in addition to `x` and `y`.  The values of `mode` and `name` are provided as arguments.  When the `mode` argument is not provided, it has a default value of `line` and when `name` is not provided, it has a default value of `line function`.
+Now let's write a function called `m_b_trace` that uses our `m_b_data` function to return a dictionary that includes keys of `name` and `mode` in addition to `x` and `y`.  The values of `mode` and `name` are provided as arguments.  When the `mode` argument is not provided, it has a default value of `lines` and when `name` is not provided, it has a default value of `line function`.
 
 
 ```python
-def m_b_trace(m, b, x_values, mode = 'line', name = 'line function'):
+def m_b_trace(m, b, x_values, mode = 'lines', name = 'line function'):
     pass
 ```
 
 
 ```python
 m_b_trace(1.5, 20, [0, 50, 100]) 
-# {'mode': 'line', 'name': 'line function', 'x': [0, 50, 100], 'y': [20.0, 95.0, 170.0]}
+# {'mode': 'lines', 'name': 'line function', 'x': [0, 50, 100], 'y': [20.0, 95.0, 170.0]}
 ```
 
 ### Calculating lines
