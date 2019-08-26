@@ -122,13 +122,13 @@ Our x values can be a list of `initial_sample_budgets`,  equal to a list of our 
 
 
 ```python
-# __SOLUTION__ 
 initial_sample_budgets = [0, 50, 100]
 attendance_values = [20, 95, 170]
 ```
 
 
 ```python
+# __SOLUTION__ 
 initial_sample_budgets = [0, 50, 100]
 attendance_values = [20, 95, 170]
 ```
@@ -136,6 +136,20 @@ attendance_values = [20, 95, 170]
 First we import the necessary plotly library, and `graph_obs` function, and setup `plotly` to be used without uploading our plots to its website.
 
 Finally, we plot out our regression line using our `attendance_with_friends` function.  Our x values will be the budgets.  For our y values, we need to use our `attendance_with_friends` function to create a list of y-value attendances for every input of x. 
+
+
+```python
+import plotly
+from plotly import graph_objs
+plotly.offline.init_notebook_mode(connected=True)
+
+trace_of_attendance_with_friends = graph_objs.Scatter(
+    x=initial_sample_budgets,
+    y=attendance_values,
+)
+
+plotly.offline.iplot([trace_of_attendance_with_friends])
+```
 
 
 ```python
@@ -162,16 +176,7 @@ plotly.offline.iplot([trace_of_attendance_with_friends])
 
 
 ```python
-import plotly
-from plotly import graph_objs
-plotly.offline.init_notebook_mode(connected=True)
-
-trace_of_attendance_with_friends = graph_objs.Scatter(
-    x=initial_sample_budgets,
-    y=attendance_values,
-)
-
-plotly.offline.iplot([trace_of_attendance_with_friends])
+trace_of_attendance_with_friends
 ```
 
 
@@ -189,12 +194,13 @@ trace_of_attendance_with_friends
 
 
 
+Now let's write a couple functions that we can use going forward.  We'll write a function called `m_b_data` that given a slope of a line, $m$, a y-intercept, $b$, will return a dictionary that has a key of `x` pointing to a list of `x_values`, and a key of `y` that points to a list of `y_values`.  Each $y$ value should be the output of a regression line for the provided $m$ and $b$ values, for each of the provided `x_values`.
+
 
 ```python
-trace_of_attendance_with_friends
+def m_b_data(m, b, x_values):
+    pass
 ```
-
-Now let's write a couple functions that we can use going forward.  We'll write a function called `m_b_data` that given a slope of a line, $m$, a y-intercept, $b$, will return a dictionary that has a key of `x` pointing to a list of `x_values`, and a key of `y` that points to a list of `y_values`.  Each $y$ value should be the output of a regression line for the provided $m$ and $b$ values, for each of the provided `x_values`.
 
 
 ```python
@@ -206,8 +212,7 @@ def m_b_data(m, b, x_values):
 
 
 ```python
-def m_b_data(m, b, x_values):
-    pass
+m_b_data(1.5, 20, [0, 50, 100]) # {'x': [0, 50, 100], 'y': [20.0, 95.0, 170.0]}
 ```
 
 
@@ -223,12 +228,13 @@ m_b_data(1.5, 20, [0, 50, 100]) # {'x': [0, 50, 100], 'y': [20.0, 95.0, 170.0]}
 
 
 
+Now let's write a function called `m_b_trace` that uses our `m_b_data` function to return a dictionary that includes keys of `name` and `mode` in addition to `x` and `y`.  The values of `mode` and `name` are provided as arguments.  When the `mode` argument is not provided, it has a default value of `lines` and when `name` is not provided, it has a default value of `line function`.
+
 
 ```python
-m_b_data(1.5, 20, [0, 50, 100]) # {'x': [0, 50, 100], 'y': [20.0, 95.0, 170.0]}
+def m_b_trace(m, b, x_values, mode = 'lines', name = 'line function'):
+    pass
 ```
-
-Now let's write a function called `m_b_trace` that uses our `m_b_data` function to return a dictionary that includes keys of `name` and `mode` in addition to `x` and `y`.  The values of `mode` and `name` are provided as arguments.  When the `mode` argument is not provided, it has a default value of `lines` and when `name` is not provided, it has a default value of `line function`.
 
 
 ```python
@@ -241,8 +247,8 @@ def m_b_trace(m, b, x_values, mode = 'lines', name = 'line function'):
 
 
 ```python
-def m_b_trace(m, b, x_values, mode = 'lines', name = 'line function'):
-    pass
+m_b_trace(1.5, 20, [0, 50, 100]) 
+# {'mode': 'line', 'name': 'line function', 'x': [0, 50, 100], 'y': [20.0, 95.0, 170.0]}
 ```
 
 
@@ -262,12 +268,6 @@ m_b_trace(1.5, 20, [0, 50, 100])
 
 
 
-
-```python
-m_b_trace(1.5, 20, [0, 50, 100]) 
-# {'mode': 'line', 'name': 'line function', 'x': [0, 50, 100], 'y': [20.0, 95.0, 170.0]}
-```
-
 ### Calculating lines
 
 The comedy show decides to advertise for two different shows.  The attendance looks like the following.
@@ -281,13 +281,13 @@ In code, we represent this as the following:
 
 
 ```python
-# __SOLUTION__ 
 first_show = {'budget': 200, 'attendance': 400}
 second_show = {'budget': 400, 'attendance': 700}
 ```
 
 
 ```python
+# __SOLUTION__ 
 first_show = {'budget': 200, 'attendance': 400}
 second_show = {'budget': 400, 'attendance': 700}
 ```
@@ -298,6 +298,12 @@ Write a function called `marginal_return_on_budget` that returns the expected am
 
 
 ```python
+def marginal_return_on_budget(first_show, second_show):
+    pass
+```
+
+
+```python
 # __SOLUTION__ 
 def marginal_return_on_budget(first_show, second_show):
     return (second_show['attendance'] - first_show['attendance'])/(second_show['budget'] - first_show['budget'])
@@ -305,8 +311,7 @@ def marginal_return_on_budget(first_show, second_show):
 
 
 ```python
-def marginal_return_on_budget(first_show, second_show):
-    pass
+marginal_return_on_budget(first_show, second_show) # 1.5
 ```
 
 
@@ -324,7 +329,7 @@ marginal_return_on_budget(first_show, second_show) # 1.5
 
 
 ```python
-marginal_return_on_budget(first_show, second_show) # 1.5
+first_show
 ```
 
 
@@ -340,12 +345,14 @@ first_show
 
 
 
+Just to check, let's use some different data to make sure our `marginal_return_on_budget` function calculates the slope properly.
+
 
 ```python
-first_show
+imaginary_third_show = {'budget': 300, 'attendance': 500}
+imaginary_fourth_show = {'budget': 600, 'attendance': 900}
+marginal_return_on_budget(imaginary_third_show, imaginary_fourth_show) # 1.3333333333333333
 ```
-
-Just to check, let's use some different data to make sure our `marginal_return_on_budget` function calculates the slope properly.
 
 
 ```python
@@ -362,13 +369,6 @@ marginal_return_on_budget(imaginary_third_show, imaginary_fourth_show) # 1.33333
 
 
 
-
-```python
-imaginary_third_show = {'budget': 300, 'attendance': 500}
-imaginary_fourth_show = {'budget': 600, 'attendance': 900}
-marginal_return_on_budget(imaginary_third_show, imaginary_fourth_show) # 1.3333333333333333
-```
-
 Great!  Now we'll begin to write functions that we can use going forward.  The functions will calculate attributes of lines in general and can be used to predict the attendance of the comedy show.
 
 Take the following data.  The comedy show spends zero dollars on advertising for the next show.  The attendance chart now looks like the following:
@@ -381,13 +381,13 @@ Take the following data.  The comedy show spends zero dollars on advertising for
 
 
 ```python
-# __SOLUTION__ 
 budgets = [0, 200, 400]
 attendance_numbers = [100, 400, 700]
 ```
 
 
 ```python
+# __SOLUTION__ 
 budgets = [0, 200, 400]
 attendance_numbers = [100, 400, 700]
 ```
@@ -396,6 +396,14 @@ To get you started, we'll provide a function called `sorted_points` that accepts
 
 
 ```python
+def sorted_points(x_values, y_values):
+    values = list(zip(x_values, y_values))
+    sorted_values = sorted(values, key=lambda value: value[0])
+    return sorted_values
+```
+
+
+```python
 # __SOLUTION__ 
 def sorted_points(x_values, y_values):
     values = list(zip(x_values, y_values))
@@ -405,10 +413,7 @@ def sorted_points(x_values, y_values):
 
 
 ```python
-def sorted_points(x_values, y_values):
-    values = list(zip(x_values, y_values))
-    sorted_values = sorted(values, key=lambda value: value[0])
-    return sorted_values
+sorted_points([4, 1, 6], [4, 6, 7])
 ```
 
 
@@ -424,12 +429,19 @@ sorted_points([4, 1, 6], [4, 6, 7])
 
 
 
+#### build_starting_line 
+
+In this section, we'll write a function called `build_starting_line`. The function that we end up building simply draws a line between our points with the highest and lowest x values.  We are selecting these points as an arbitrary "starting" point for our regression line.
+
+>  As John von Neumann said, "truth … is much too complicated to allow anything but approximations."  All models are inherently wrong, but some are useful.  In future lessons, we will learn how to build a regression line that accurately matches our dataset. For now, we will focus on building a useful "starting" line using the first and last points along the x-axis.
+
+**First**, write a function called `slope` that, given a list of x values and a list of y values, will use the points with the lowest and highest x values to calculate the slope of a line.
+
 
 ```python
-sorted_points([4, 1, 6], [4, 6, 7])
+def slope(x_values, y_values):
+    pass
 ```
-
-#### build_starting_line 
 
 
 ```python
@@ -444,11 +456,10 @@ def slope(x_values, y_values):
     return m
 ```
 
-In this section, we'll write a function called `build_starting_line`. The function that we end up building simply draws a line between our points with the highest and lowest x values.  We are selecting these points as an arbitrary "starting" point for our regression line.
 
->  As John von Neumann said, "truth … is much too complicated to allow anything but approximations."  All models are inherently wrong, but some are useful.  In future lessons, we will learn how to build a regression line that accurately matches our dataset. For now, we will focus on building a useful "starting" line using the first and last points along the x-axis.
-
-**First**, write a function called `slope` that, given a list of x values and a list of y values, will use the points with the lowest and highest x values to calculate the slope of a line.
+```python
+slope([200, 400], [400, 700]) # 1.5
+```
 
 
 ```python
@@ -463,15 +474,12 @@ slope([200, 400], [400, 700]) # 1.5
 
 
 
+Now write a function called `y_intercept`.  Use the `slope` function to calculate the slope if it isn't provided as an argument. Then we will use the slope and the values of the point with the highest x value to return the y-intercept.
+
 
 ```python
-def slope(x_values, y_values):
+def y_intercept(x_values, y_values, m = None):
     pass
-```
-
-
-```python
-slope([200, 400], [400, 700]) # 1.5
 ```
 
 
@@ -486,7 +494,10 @@ def y_intercept(x_values, y_values, m = None):
     return offset
 ```
 
-Now write a function called `y_intercept`.  Use the `slope` function to calculate the slope if it isn't provided as an argument. Then we will use the slope and the values of the point with the highest x value to return the y-intercept.
+
+```python
+y_intercept([200, 400], [400, 700]) # 100
+```
 
 
 ```python
@@ -503,8 +514,7 @@ y_intercept([200, 400], [400, 700]) # 100
 
 
 ```python
-def y_intercept(x_values, y_values, m = None):
-    pass
+y_intercept([0, 200, 400], [10, 400, 700]) # 10
 ```
 
 
@@ -520,14 +530,12 @@ y_intercept([0, 200, 400], [10, 400, 700]) # 10
 
 
 
-
-```python
-y_intercept([200, 400], [400, 700]) # 100
-```
+Now write a function called `build_starting_line` that given a list of `x_values` and a list of `y_values` returns a dictionary with a key of `m` and a key of `b` to return the `m` and `b` values of the calculated regression line.  Use the  `slope` and `y_intercept` functions to calculate the line.
 
 
 ```python
-y_intercept([0, 200, 400], [10, 400, 700]) # 10
+def build_starting_line(x_values, y_values):
+    pass
 ```
 
 
@@ -542,7 +550,10 @@ def build_starting_line(x_values, y_values):
     return {'m': m, 'b': b}
 ```
 
-Now write a function called `build_starting_line` that given a list of `x_values` and a list of `y_values` returns a dictionary with a key of `m` and a key of `b` to return the `m` and `b` values of the calculated regression line.  Use the  `slope` and `y_intercept` functions to calculate the line.
+
+```python
+build_starting_line([0, 200, 400], [10, 400, 700]) # {'b': 10.0, 'm': 1.725}
+```
 
 
 ```python
@@ -557,15 +568,14 @@ build_starting_line([0, 200, 400], [10, 400, 700]) # {'b': 10.0, 'm': 1.725}
 
 
 
-
-```python
-def build_starting_line(x_values, y_values):
-    pass
-```
+**Finally**, let's write a function called `expected_value_for_line` that returns the expected attendance given the $m$, $b$, and $x$ $value$.
 
 
 ```python
-build_starting_line([0, 200, 400], [10, 400, 700]) # {'b': 10.0, 'm': 1.725}
+first_show = {'budget': 300, 'attendance': 700}
+second_show = {'budget': 400, 'attendance': 900}
+
+shows = [first_show, second_show]
 ```
 
 
@@ -577,7 +587,11 @@ second_show = {'budget': 400, 'attendance': 900}
 shows = [first_show, second_show]
 ```
 
-**Finally**, let's write a function called `expected_value_for_line` that returns the expected attendance given the $m$, $b$, and $x$ $value$.
+
+```python
+def expected_value_for_line(m, b, x_value):
+    pass
+```
 
 
 ```python
@@ -588,10 +602,7 @@ def expected_value_for_line(m, b, x_value):
 
 
 ```python
-first_show = {'budget': 300, 'attendance': 700}
-second_show = {'budget': 400, 'attendance': 900}
-
-shows = [first_show, second_show]
+expected_value_for_line(1.5, 100, 100) # 250
 ```
 
 
@@ -607,18 +618,22 @@ expected_value_for_line(1.5, 100, 100) # 250
 
 
 
-
-```python
-def expected_value_for_line(m, b, x_value):
-    pass
-```
-
-
-```python
-expected_value_for_line(1.5, 100, 100) # 250
-```
-
 ### Using our functions
+
+Now that we have built these functions, we can use them on our dataset.  Uncomment and run the lines below to see how we can use our functions going forward.
+
+
+```python
+first_show = {'budget': 200, 'attendance': 400}
+second_show = {'budget': 400, 'attendance': 700}
+third_show = {'budget': 300, 'attendance': 500}
+fourth_show = {'budget': 600, 'attendance': 900}
+
+comedy_shows = [first_show, second_show, third_show, fourth_show]
+
+show_x_values = list(map(lambda show: show['budget'], comedy_shows))
+show_y_values = list(map(lambda show: show['attendance'], comedy_shows))
+```
 
 
 ```python
@@ -634,7 +649,11 @@ show_x_values = list(map(lambda show: show['budget'], comedy_shows))
 show_y_values = list(map(lambda show: show['attendance'], comedy_shows))
 ```
 
-Now that we have built these functions, we can use them on our dataset.  Uncomment and run the lines below to see how we can use our functions going forward.
+
+```python
+def trace_values(x_values, y_values, mode = 'markers', name="data"):
+    return {'x': x_values, 'y': y_values, 'mode': mode, 'name': name}
+```
 
 
 ```python
@@ -645,15 +664,8 @@ def trace_values(x_values, y_values, mode = 'markers', name="data"):
 
 
 ```python
-first_show = {'budget': 200, 'attendance': 400}
-second_show = {'budget': 400, 'attendance': 700}
-third_show = {'budget': 300, 'attendance': 500}
-fourth_show = {'budget': 600, 'attendance': 900}
-
-comedy_shows = [first_show, second_show, third_show, fourth_show]
-
-show_x_values = list(map(lambda show: show['budget'], comedy_shows))
-show_y_values = list(map(lambda show: show['attendance'], comedy_shows))
+def plot(traces):
+    plotly.offline.iplot(traces)
 ```
 
 
@@ -665,8 +677,8 @@ def plot(traces):
 
 
 ```python
-def trace_values(x_values, y_values, mode = 'markers', name="data"):
-    return {'x': x_values, 'y': y_values, 'mode': mode, 'name': name}
+# comedy_show_trace = trace_values(show_x_values, show_y_values, name = 'comedy show data')
+# comedy_show_trace
 ```
 
 
@@ -688,8 +700,8 @@ def trace_values(x_values, y_values, mode = 'markers', name="data"):
 
 
 ```python
-def plot(traces):
-    plotly.offline.iplot(traces)
+# show_starting_line = build_starting_line(show_x_values, show_y_values)
+# show_starting_line
 ```
 
 
@@ -708,8 +720,7 @@ def plot(traces):
 
 
 ```python
-# comedy_show_trace = trace_values(show_x_values, show_y_values, name = 'comedy show data')
-# comedy_show_trace
+# trace_show_line = m_b_trace(show_starting_line['m'], show_starting_line['b'], show_x_values, name = 'starting line')
 ```
 
 
@@ -720,8 +731,7 @@ def plot(traces):
 
 
 ```python
-# show_starting_line = build_starting_line(show_x_values, show_y_values)
-# show_starting_line
+# trace_show_line
 ```
 
 
@@ -742,22 +752,12 @@ def plot(traces):
 
 
 ```python
-# trace_show_line = m_b_trace(show_starting_line['m'], show_starting_line['b'], show_x_values, name = 'starting line')
-```
-
-
-```python
-# __SOLUTION__ 
 # plot([comedy_show_trace, trace_show_line])
 ```
 
 
 ```python
-# trace_show_line
-```
-
-
-```python
+# __SOLUTION__ 
 # plot([comedy_show_trace, trace_show_line])
 ```
 
