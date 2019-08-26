@@ -107,7 +107,7 @@ def m_b_trace(m, b, x_values, mode = 'lines', name = 'line function'):
 
 ```python
 m_b_trace(1.5, 20, [0, 50, 100]) 
-# {'mode': 'lines', 'name': 'line function', 'x': [0, 50, 100], 'y': [20.0, 95.0, 170.0]}
+# {'mode': 'line', 'name': 'line function', 'x': [0, 50, 100], 'y': [20.0, 95.0, 170.0]}
 ```
 
 ### Calculating lines
