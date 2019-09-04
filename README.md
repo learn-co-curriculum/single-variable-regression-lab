@@ -171,7 +171,7 @@ plotly.offline.iplot([trace_of_attendance_with_friends])
 
 
 
-<div id="3a779e12-33f4-45ed-81e9-6fe426c6918b" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("3a779e12-33f4-45ed-81e9-6fe426c6918b", [{"x": [0, 50, 100], "y": [20, 95, 170], "type": "scatter", "uid": "dba650d8-ccbb-11e8-a836-88e9fe61eb3a"}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script>
+<div id="14a9d9a6-c390-4d70-8bcc-9298e8039275" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("14a9d9a6-c390-4d70-8bcc-9298e8039275", [{"x": [0, 50, 100], "y": [20, 95, 170], "type": "scatter", "uid": "f2208cd2-cf2d-11e9-aa32-3af9d3ad3e0b"}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script>
 
 
 
@@ -677,15 +677,15 @@ def plot(traces):
 
 
 ```python
-# comedy_show_trace = trace_values(show_x_values, show_y_values, name = 'comedy show data')
-# comedy_show_trace
+comedy_show_trace = trace_values(show_x_values, show_y_values, name = 'comedy show data')
+comedy_show_trace
 ```
 
 
 ```python
 # __SOLUTION__ 
-# comedy_show_trace = trace_values(show_x_values, show_y_values, name = 'comedy show data')
-# comedy_show_trace
+comedy_show_trace = trace_values(show_x_values, show_y_values, name = 'comedy show data')
+comedy_show_trace
 ```
 
 
@@ -700,15 +700,15 @@ def plot(traces):
 
 
 ```python
-# show_starting_line = build_starting_line(show_x_values, show_y_values)
-# show_starting_line
+show_starting_line = build_starting_line(show_x_values, show_y_values)
+show_starting_line
 ```
 
 
 ```python
 # __SOLUTION__ 
-# show_starting_line = build_starting_line(show_x_values, show_y_values)
-# show_starting_line
+show_starting_line = build_starting_line(show_x_values, show_y_values)
+show_starting_line
 ```
 
 
@@ -720,24 +720,24 @@ def plot(traces):
 
 
 ```python
-# trace_show_line = m_b_trace(show_starting_line['m'], show_starting_line['b'], show_x_values, name = 'starting line')
+trace_show_line = m_b_trace(show_starting_line['m'], show_starting_line['b'], show_x_values, name = 'starting line')
 ```
 
 
 ```python
 # __SOLUTION__ 
-# trace_show_line = m_b_trace(show_starting_line['m'], show_starting_line['b'], show_x_values, name = 'starting line')
+trace_show_line = m_b_trace(show_starting_line['m'], show_starting_line['b'], show_x_values, name = 'starting line')
 ```
 
 
 ```python
-# trace_show_line
+trace_show_line
 ```
 
 
 ```python
 # __SOLUTION__ 
-# trace_show_line
+trace_show_line
 ```
 
 
@@ -752,13 +752,17 @@ def plot(traces):
 
 
 ```python
-# plot([comedy_show_trace, trace_show_line])
+plot([comedy_show_trace, trace_show_line])
 ```
 
 
 ```python
 # __SOLUTION__ 
-# plot([comedy_show_trace, trace_show_line])
+plot([comedy_show_trace, trace_show_line])
 ```
+
+
+<div id="ff47abe9-3edb-41d0-ac77-108227cefc90" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("ff47abe9-3edb-41d0-ac77-108227cefc90", [{"mode": "markers", "name": "comedy show data", "x": [200, 400, 300, 600], "y": [400, 700, 500, 900], "type": "scatter", "uid": "3499a666-cf2e-11e9-abc2-3af9d3ad3e0b"}, {"mode": "lines", "name": "starting line", "x": [200, 400, 300, 600], "y": [400.0, 650.0, 525.0, 900.0], "type": "scatter", "uid": "3499a7cc-cf2e-11e9-9d24-3af9d3ad3e0b"}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script>
+
 
 As we can see above, we built a "starting" regression line out of the points with the lowest and highest x values. We will learn in future lessons how to improve our line so that it becomes the "best fit" given all of our dataset, not just the first and last points. For now, this approach sufficed since our goal was to practice working with and plotting line functions.
