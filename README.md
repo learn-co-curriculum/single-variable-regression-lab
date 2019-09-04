@@ -289,29 +289,29 @@ def plot(traces):
 
 
 ```python
-# comedy_show_trace = trace_values(show_x_values, show_y_values, name = 'comedy show data')
-# comedy_show_trace
+comedy_show_trace = trace_values(show_x_values, show_y_values, name = 'comedy show data')
+comedy_show_trace
 ```
 
 
 ```python
-# show_starting_line = build_starting_line(show_x_values, show_y_values)
-# show_starting_line
+show_starting_line = build_starting_line(show_x_values, show_y_values)
+show_starting_line
 ```
 
 
 ```python
-# trace_show_line = m_b_trace(show_starting_line['m'], show_starting_line['b'], show_x_values, name = 'starting line')
+trace_show_line = m_b_trace(show_starting_line['m'], show_starting_line['b'], show_x_values, name = 'starting line')
 ```
 
 
 ```python
-# trace_show_line
+trace_show_line
 ```
 
 
 ```python
-# plot([comedy_show_trace, trace_show_line])
+plot([comedy_show_trace, trace_show_line])
 ```
 
 As we can see above, we built a "starting" regression line out of the points with the lowest and highest x values. We will learn in future lessons how to improve our line so that it becomes the "best fit" given all of our dataset, not just the first and last points. For now, this approach sufficed since our goal was to practice working with and plotting line functions.
